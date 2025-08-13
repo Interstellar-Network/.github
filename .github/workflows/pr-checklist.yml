@@ -1,7 +1,10 @@
 name: Organization PR Quality Check
 
 on:
-  workflow_call:
+  pull_request:
+    # This set of types covers all the ways a PR can be
+    # created, updated, or revived.
+    types: [opened, edited, synchronize, reopened]
 
 jobs:
   # ENFORCE that all the checkboxes in a PR first message are ticked
