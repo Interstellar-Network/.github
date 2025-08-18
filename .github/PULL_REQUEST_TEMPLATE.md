@@ -1,6 +1,8 @@
 <!-- Thank you for your contribution! Please review the following guidelines and check the boxes to confirm. -->
 
-### Coding Guidelines Compliance
+### [Coding Guidelines Compliance](https://docs.google.com/document/d/1lFZI2_cpLYVyM8GxI_8AZvN-Xmks_oUjl9QzkvH0-z4/edit?tab=t.0#heading=h.f9j04nkxp56)
+
+**NOTE**: The points below are for ease-of-use, but the linked guideline is **THE** reference. You are expected to regularly refer to the link and make sure you are following the latest version.
 
 ---
 
@@ -16,7 +18,7 @@ Reminder: use `[ci skip]` if you know the code is not compiling or some tests ar
 ---
 
 ### 2. Code Structure
-- [ ] All new functions, structs, and fields are **private by default** and only `pub` where necessary.
+- [ ] All new functions, structs, and fields are **private by default** and only `pub` where necessary (no `pub(crate)`).
 - [ ] No code has been copy-pasted; logic has been moved into reusable functions or shared crates.
 - [ ] No `trait` has been added for a single `impl`.
 - [ ] Complex modules have been moved into their own files (no inline `mod`).
@@ -34,8 +36,8 @@ Reminder: use `[ci skip]` if you know the code is not compiling or some tests ar
 - [ ] A test case exists for **every logical branch** (each `ensure!`, `match`, `if/else`, `map_err`, `?`).
 - [ ] External APIs are **not** called directly in unit tests. (Mocking is a last resort; `testcontainers` or local servers are preferred).
 - [ ] Tests are self-contained and perform their own setup/teardown.
-- [ ] Tests are not mixed; each test function verifies a single, specific behavior.
-- [ ] A logger (`env_logger::try_init()`) is initialized in the test setup.
+- [ ] Tests are not mixed; each test function verifies a single, specific behavior. The same function is not called multiple times in one test, unless testing a sequence.
+- [ ] The logger is set up during tests (e.g. `let _ = env_logger::try_init();`).
 
 ---
 
@@ -52,3 +54,8 @@ Reminder: use `[ci skip]` if you know the code is not compiling or some tests ar
 - [ ] Logging has been added to all new functions and error paths (`map_err`).
 - [ ] `ensure_has_root_account` (or equivalent authorization check) is present on **every** new extrinsic and getter.
 
+---
+
+### 7. Project Architecture
+- [ ] **(`worker` specific)** Changes only add/modify `TrustedGetter` and `TrustedCall`; the `cli` folder has not been modified without asking first.
+- [ ] **Dependencies have not been improperly exposed.** (e.g., `wallet-app` does not depend on `your-new-pallet`).
