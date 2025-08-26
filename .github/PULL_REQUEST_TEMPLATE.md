@@ -12,6 +12,7 @@
   - `cargo clippy -- -D warnings`
   - `cargo check`
   - `cargo test`
+  - `git status` is clean. Especially, there is no untracked file
   - `[if applicable: tests_sgx]`
 Reminder: use `[ci skip]` if you know the code is not compiling or some tests are broken
 
